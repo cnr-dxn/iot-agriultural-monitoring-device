@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "select * from datalog order by id DESC" | mysql -u reid -pHaymaker\!I25 -t general_data

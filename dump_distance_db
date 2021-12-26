@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "select * from level_data" | mysql -u reid -pHaymaker\!I25 -t distance_data | less

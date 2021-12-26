@@ -1,0 +1,38 @@
+
+
+
+Source for Particle Device:  cellTest.ino
+	cellTest.ino will work on either cell-enabled or regular partical devices
+	It requires a library HC_SR04 (NOT HC-SR04)
+
+Wiring: Connect an HC-SR04 Range finder as follows:
+	Spark   HC-SR04
+	GND     GND
+	5V      VCC
+	D4      Trig
+	D5      Voltage divider output - see below
+
+	Echo ---|
+       		>
+       		< 470 ohm
+       		>
+       		---------- D5 on Particle device
+       		>
+       		< 470 ohm
+       		>
+	GND ----|
+
+	I think the above resistors are for 5V to 3.3 conversion.  If so
+	I'd have picked something like 720 on bottom to get the swing closer to 3.3V
+
+This example sketch will issue "write_distance" events to the particle cloud.
+You should be able to see them in the console->events window.
+To get that data to a database, we use a "webhook".  Go to the console->integrations->new-integration->webhook
+	EventName:  write_distance
+	URL: http://198.58.97.240/reidtest/write_distance.cgi
+	Request Type: GET
+	Request Format:  Query parameters
+	Device:  any (or pick just one, but then the webhook will only work for one device)
+
+Persistant Data should now be available in a mysql database on that server (198.58.97.240)
+	
